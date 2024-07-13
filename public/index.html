@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>InternX</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="" method="post">
+        <h1>Intern<span>X</span></h1>
+        <h4>First Name :</h4>
+        <input type="text" />
+        <h4>Last Name :</h4>
+        <input type="text" />
+        <h4>Role to apply for <span>(as in Internshala)</span> :</h4>
+        <input type="text" id="role" />
+        <h4>Apply for Internship number :</h4>
+        <input type="number" id="child" />
+        <h4>Path of Updated Resume <span>(Local System Path)</span> :</h4>
+        <input type="text" id="resumePath" />
+        <h4>Content for Cover Letter :</h4>
+        <textarea name="" id="cover-letter"></textarea><br /><br />
+        <button id="post">Apply</button>
+      </form>
+    </div>
+    <script>
+      const postBtn = document.getElementById("post");
+      const role = document.getElementById("role");
+      const child = document.getElementById("child");
+      const resumePath = document.getElementById("resumePath");
+      const coverLetter = document.getElementById("cover-letter");
+
+      const baseUrl = "http://localhost:8383/";
+
+      postBtn.addEventListener("click", postInfo);
+      async function postInfo(e) {
+        e.preventDefault();
+        const res = await fetch(baseUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            role: role.value,
+            child: child.value,
+            resumePath: resumePath.value,
+            coverLetter: coverLetter.value,
+          }),
+        });
+      }
+    </script>
+  </body>
+</html>
